@@ -1,115 +1,106 @@
 import { Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import PageShell from '@/components/feature/PageShell';
-import PageHero from '@/components/base/PageHero';
+import useTx from '@/hooks/useTx';
+import usePageMeta from '@/hooks/usePageMeta';
+import Rich from '@/components/base/Rich';
+import CountUp from '@/components/base/CountUp';
+import Panel from '@/components/feature/Panel';
+import { IMG } from '@/mocks/media';
 
-const MANDATE = [1, 2, 3, 4, 5, 6];
-const VALUES = [1, 2, 3, 4, 5, 6, 7];
+interface Impact { n: number; suffix: string; label: string; text: string }
+interface Value { t: string; d: string }
+interface Member { name: string; role: string }
 
-export default function AboutPage() {
-  const { t } = useTranslation();
+const SERVE_ICONS = ['ri-women-line', 'ri-seedling-line', 'ri-home-heart-line', 'ri-earth-line'];
+const TEAM_IMG = [IMG.team1, IMG.team2, IMG.team3];
+
+export default function About() {
+  usePageMeta('about');
+  const { s, o, lang } = useTx();
+  const impact = o<Impact[]>('about.impact');
+  const values = o<Value[]>('about.values');
+  const team = o<Member[]>('about.team');
+  const serve = o<string[]>('about.serve');
+
   return (
-    <PageShell title={t('seo.about')} description={t('meta.about')} metaKey="about">
-      <PageHero
-        stamp={t('ab.stamp')}
-        title={t('ab.h1')}
-        sub={t('ab.sub')}
-        image="https://readdy.ai/api/search-image?query=Cinematic%20wide%20photograph%20of%20a%20diverse%20group%20of%20African%20and%20Canadian%20community%20members%20gathered%20in%20a%20sunlit%20hall%20listening%20to%20a%20speaker%2C%20warm%20golden%20window%20light%2C%20deep%20teal%20shadows%20in%20the%20left%20third%2C%20editorial%20documentary%20style%2C%20calm%20and%20dignified%20atmosphere&width=2000&height=1125&seq=page-about-hero-01&orientation=landscape"
-        alt={t('ab.alt')}
-      >
-        <Link className="cta" to="/work">{t('nav.work')} <i className="ri-arrow-right-line"></i></Link>
-        <Link className="cta cta-ghost" to="/contact">{t('nav.contact')}</Link>
-      </PageHero>
+    <>
+      <Panel side="left" img={IMG.aboutHero} alt="Women leaders around a long table with gold place cards" accent="01">
+        <p className="stamp" data-reveal>{s('about.stamp')}</p>
+        <Rich as="h1" html={s('about.title')} data-reveal />
+        <p className="sub" data-reveal>{s('tagline')}</p>
+      </Panel>
 
-      <section className="band band-cream">
-        <div className="band-inner grid-two">
-          <div>
-            <p className="eyebrow" data-reveal>{t('ab.who.eyebrow')}</p>
-            <h2 className="sec mt-3" data-reveal>{t('ab.who.h')}</h2>
-            <div className="prose mt-5">
-              <p data-reveal>{t('ab.who.p1')}</p>
-              <p data-reveal>{t('ab.who.p2')}</p>
-              <p data-reveal>{t('ab.who.p3')}</p>
-              <p data-reveal>{t('ab.who.p4')}</p>
-            </div>
+      <Panel side="right" img={IMG.aboutStory} alt="Three generations of Black women sharing tea by a warm window">
+        <p className="stamp" data-reveal>{s('about.storyStamp')}</p>
+        <Rich as="h2" html={s('about.storyTitle')} data-reveal />
+        <p className="sub" data-reveal>{s('about.story')}</p>
+        <div className="pull" data-reveal><p>{s('about.story2')}</p></div>
+      </Panel>
+
+      <section className="panel manifesto" data-side="full">
+        <span className="ring w-[50vmin] h-[50vmin] right-[8%] top-[10%]" data-parallax="0.55" aria-hidden="true" />
+        <div className="panel-copy panel-copy--wide" data-parallax="-0.08">
+          <p className="stamp" data-reveal>{s('about.impactStamp')}</p>
+          <Rich as="h2" html={s('about.impactTitle')} data-reveal />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-8 text-left">
+            {impact.map((m) => (
+              <div key={m.label} className="card p-7" data-reveal>
+                <p className="text-5xl md:text-6xl font-semibold tracking-tight m-0" style={{ color: 'var(--accent)' }}><CountUp to={m.n} suffix={m.suffix} locale={lang} /></p>
+                <p className="stamp mt-3">{m.label}</p>
+                <p className="text-sm mt-3 m-0" style={{ color: 'var(--muted)' }}>{m.text}</p>
+                <span className="gold-line" />
+              </div>
+            ))}
           </div>
-          <figure className="media-frame m-0" data-reveal>
-            <img width={1200} height={900} alt={t('ab.alt')} title="Ark of Hope community" loading="lazy" decoding="async"
-              src="https://readdy.ai/api/search-image?query=Candid%20cinematic%20photograph%20of%20two%20women%20of%20African%20descent%20in%20conversation%20at%20a%20community%20table%20with%20notebooks%20and%20tea%2C%20warm%20side%20light%2C%20deep%20teal%20wall%20behind%2C%20soft%20focus%20background%2C%20human%20and%20approachable%20documentary%20style&width=1200&height=900&seq=page-about-portrait-02&orientation=landscape" />
-            <figcaption className="media-quote">{t('brand.full')}</figcaption>
-          </figure>
         </div>
       </section>
 
-      <section className="band band-light">
-        <div className="band-inner">
-          <div className="grid-auto">
-            <article className="tile" data-reveal>
-              <span className="tile-num">01</span>
-              <h2 className="text-2xl font-semibold m-0">{t('ab.mission.h')}</h2>
-              <p>{t('ab.mission.p')}</p>
-            </article>
-            <article className="tile" data-reveal>
-              <span className="tile-num">02</span>
-              <h2 className="text-2xl font-semibold m-0">{t('ab.vision.h')}</h2>
-              <p>{t('ab.vision.p')}</p>
-            </article>
-          </div>
-
-          <div className="sec-head mt-16">
-            <p className="eyebrow" data-reveal>{t('ab.mandate.eyebrow')}</p>
-            <h2 className="sec" data-reveal>{t('ab.mandate.h')}</h2>
-          </div>
-          <ul className="list-rows">
-            {MANDATE.map((n) => (
-              <li key={n} data-reveal>
-                <span className="idx">{String(n).padStart(2, '0')}</span>
-                <div>
-                  <h3>{t(`ab.m${n}t`)}</h3>
-                  <p>{t(`ab.m${n}p`)}</p>
-                </div>
+      <Panel side="right" img={IMG.aboutValues} alt="A newcomer woman celebrating her graduation among applauding women" wide>
+        <div className="lg:ml-auto lg:max-w-[880px] flex flex-col gap-4">
+          <p className="stamp" data-reveal>{s('about.valuesStamp')}</p>
+          <Rich as="h2" html={s('about.valuesTitle')} data-reveal />
+          <ul className="rule-list">
+            {values.map((v, i) => (
+              <li key={v.t} data-reveal>
+                <span className="idx" style={{ fontFamily: 'var(--font-accent)', fontStyle: 'italic', fontSize: 22, color: 'var(--accent)' }}>{String(i + 1).padStart(2, '0')}</span>
+                <h3>{v.t}</h3><p>{v.d}</p>
               </li>
             ))}
           </ul>
         </div>
-      </section>
+      </Panel>
 
-      <section className="band band-cream">
-        <div className="band-inner">
-          <div className="sec-head">
-            <p className="eyebrow" data-reveal>{t('ab.values.eyebrow')}</p>
-            <h2 className="sec" data-reveal>{t('ab.values.h')}</h2>
-          </div>
-          <div className="grid-auto">
-            {VALUES.map((n) => (
-              <article key={n} className="tile" data-reveal>
-                <span className="tile-num">{String(n).padStart(2, '0')}</span>
-                <h3>{t(`ab.v${n}t`)}</h3>
-                <p>{t(`ab.v${n}p`)}</p>
-              </article>
-            ))}
-          </div>
+      <section className="px-4 md:px-6 lg:px-[8vw] py-24 md:py-32" style={{ background: 'var(--surface)' }}>
+        <p className="stamp" data-reveal>{s('about.teamStamp')}</p>
+        <Rich as="h2" html={s('about.teamTitle')} className="text-3xl md:text-5xl font-semibold tracking-tight mt-3 mb-12" data-reveal />
+        {/* CONTENT: confirm with client before launch */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" data-parallax="-0.04">
+          {team.map((m, i) => (
+            <figure key={m.name} className="m-0 group" data-reveal>
+              <div className="arch w-full h-[380px] md:h-[440px]" style={{ border: '1px solid color-mix(in srgb, var(--accent) 35%, transparent)' }}>
+                <img src={TEAM_IMG[i]} alt={`${m.name}, ${m.role}`} title={m.name} loading="lazy" className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" />
+              </div>
+              <figcaption className="mt-5"><p className="text-xl font-semibold m-0">{m.name}</p><p className="text-sm m-0 mt-1" style={{ color: 'var(--accent2)' }}>{m.role}</p></figcaption>
+            </figure>
+          ))}
         </div>
       </section>
 
-      <section className="band band-ink">
-        <div className="band-inner grid-two items-center">
-          <div>
-            <p className="eyebrow" data-reveal>{t('ab.bi.eyebrow')}</p>
-            <h2 className="sec mt-3" data-reveal>{t('ab.bi.h')}</h2>
-            <p className="lede mt-4" data-reveal>{t('ab.bi.p')}</p>
-            <div className="link-row mt-6" data-reveal>
-              <Link className="cta" to="/contact">{t('pg.email')} <i className="ri-arrow-right-line"></i></Link>
-              <Link className="cta cta-ghost" to="/accessibility">{t('ft.access')}</Link>
+      <Panel side="bottom" img={IMG.voices} alt="Women and families gathered in a warm community room" wide>
+        <p className="stamp" data-reveal>{s('about.serveStamp')}</p>
+        <Rich as="h2" html={s('about.serveTitle')} data-reveal />
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6 w-full max-w-[900px]">
+          {serve.map((w, i) => (
+            <div key={w} className="card p-5 flex flex-col items-center gap-3 text-center" data-reveal>
+              <span className="w-12 h-12 rounded-full flex items-center justify-center" style={{ border: '1px solid var(--accent)', color: 'var(--accent)' }}><i className={`${SERVE_ICONS[i]} text-xl`} /></span>
+              <span className="text-sm font-medium">{w}</span>
             </div>
-          </div>
-          <div className="tile !border-foreground-50/20" data-reveal>
-            <p className="eyebrow m-0">{t('ab.lead.eyebrow')}</p>
-            <h3>{t('ab.lead.h')}</h3>
-            <p className="italic">{t('ab.lead.p')}</p>
-          </div>
+          ))}
         </div>
-      </section>
-    </PageShell>
+        <div className="flex flex-wrap gap-3 justify-center mt-6" data-reveal>
+          <Link to="/get-involved" className="btn btn-gold">{s('common.getInvolved')} <i className="ri-arrow-right-line" /></Link>
+          <Link to="/services" className="btn btn-outline">{s('nav.services')}</Link>
+        </div>
+      </Panel>
+    </>
   );
 }

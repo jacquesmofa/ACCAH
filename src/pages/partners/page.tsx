@@ -1,79 +1,58 @@
 import { Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import PageShell from '@/components/feature/PageShell';
-import PageHero from '@/components/base/PageHero';
-import ArkForm from '@/components/feature/ArkForm';
+import useTx from '@/hooks/useTx';
+import usePageMeta from '@/hooks/usePageMeta';
+import Rich from '@/components/base/Rich';
+import Panel from '@/components/feature/Panel';
+import { IMG } from '@/mocks/media';
 
-const WAYS = [1, 2, 3, 4, 5, 6, 7, 8];
+interface PType { t: string; d: string; icon: string }
 
-export default function PartnersPage() {
-  const { t } = useTranslation();
+export default function Partners() {
+  usePageMeta('partners');
+  const { s, o } = useTx();
+  const types = o<PType[]>('partners.types');
+
   return (
-    <PageShell title={t('seo.partners')} description={t('meta.partners')} metaKey="partners">
-      <PageHero
-        stamp={t('pt.stamp')}
-        title={t('pt.h1')}
-        sub={t('pt.sub')}
-        image="https://readdy.ai/api/search-image?query=Cinematic%20wide%20photograph%20of%20a%20cross-sector%20working%20session%20with%20diverse%20professionals%20around%20a%20long%20table%20covered%20in%20documents%20and%20coffee%20cups%2C%20warm%20golden%20light%20through%20large%20windows%2C%20deep%20teal%20shadows%2C%20collaborative%20focused%20atmosphere%2C%20editorial%20style&width=2000&height=1125&seq=page-partners-hero-01&orientation=landscape"
-        alt={t('pt.alt')}
-      >
-        <a className="cta" href="#partner-form">{t('pt.cta')} <i className="ri-arrow-down-line"></i></a>
-        <Link className="cta cta-ghost" to="/credentials-ark">{t('nav.ark')}</Link>
-      </PageHero>
+    <>
+      <Panel side="left" img={IMG.partnersHero} alt="Two women professionals shaking hands warmly" accent="+">
+        <p className="stamp" data-reveal>{s('partners.stamp')}</p>
+        <Rich as="h1" html={s('partners.title')} data-reveal />
+        <p className="sub" data-reveal>{s('partners.sub')}</p>
+      </Panel>
 
-      <section className="band band-cream">
-        <div className="band-inner grid-two">
-          <div>
-            <p className="eyebrow" data-reveal>{t('pt.phil.eyebrow')}</p>
-            <h2 className="sec mt-3" data-reveal>{t('pt.phil.h')}</h2>
+      <section className="px-4 md:px-6 lg:px-[8vw] py-24 md:py-32" style={{ background: 'var(--surface)' }}>
+        <p className="stamp" data-reveal>{s('partners.gridStamp')}</p>
+        <Rich as="h2" html={s('partners.gridTitle')} className="text-3xl md:text-5xl font-semibold tracking-tight mt-3 mb-12" data-reveal />
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-5">
+          <div className="card logo-tile h-36 md:h-44 flex flex-col items-center justify-center gap-2 text-center p-4" data-reveal>
+            <i className="ri-school-line text-3xl" style={{ color: 'var(--accent)' }} />
+            <span className="font-semibold text-sm md:text-base">Peel District School Board</span>
+            <span className="text-[11px]" style={{ color: 'var(--muted)' }}>{s('partners.logoNote')}</span>
           </div>
-          <div className="prose">
-            <p data-reveal>{t('pt.phil.p1')}</p>
-            <p data-reveal>{t('pt.phil.p2')}</p>
-          </div>
+          {[1, 2, 3, 4, 5].map((n) => (
+            <div key={n} className="h-36 md:h-44 rounded-[18px] flex items-center justify-center text-sm" style={{ border: '1px dashed color-mix(in srgb, var(--text) 22%, transparent)', color: 'var(--muted)' }} data-reveal>{s('partners.yourLogo')}</div>
+          ))}
         </div>
       </section>
 
-      <section className="band band-light">
-        <div className="band-inner">
-          <div className="sec-head">
-            <p className="eyebrow" data-reveal>{t('pt.ways.eyebrow')}</p>
-            <h2 className="sec" data-reveal>{t('pt.ways.h')}</h2>
-          </div>
-          <div className="grid-auto">
-            {WAYS.map((n) => (
-              <article key={n} className="tile" data-reveal>
-                <span className="tile-num">{String(n).padStart(2, '0')}</span>
-                <p>{t(`pt.w${n}`)}</p>
-              </article>
-            ))}
-          </div>
-          <p className="notice mt-8" data-reveal>{t('pt.logos')}</p>
+      <Panel side="bottom" img={IMG.programs} alt="Women in a warmly lit mentorship circle" wide>
+        <p className="stamp" data-reveal>{s('partners.typesStamp')}</p>
+        <Rich as="h2" html={s('partners.typesTitle')} data-reveal />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-6 w-full text-left">
+          {types.map((t) => (
+            <div key={t.t} className="card p-7" data-reveal>
+              <span className="w-12 h-12 rounded-full flex items-center justify-center" style={{ border: '1px solid var(--accent)', color: 'var(--accent)' }}><i className={`${t.icon} text-xl`} /></span>
+              <h3 className="text-xl font-semibold mt-5 mb-2">{t.t}</h3>
+              <p className="text-sm m-0 leading-relaxed" style={{ color: 'color-mix(in srgb, var(--text) 82%, transparent)' }}>{t.d}</p>
+              <span className="gold-line" />
+            </div>
+          ))}
         </div>
-      </section>
-
-      <section id="partner-form" className="band band-cream scroll-mt-24">
-        <div className="band-inner grid-two items-start">
-          <div>
-            <p className="eyebrow" data-reveal>{t('pt.form.eyebrow')}</p>
-            <h2 className="sec mt-3" data-reveal>{t('pt.form.h')}</h2>
-            <p className="lede mt-4" data-reveal>{t('pt.form.p')}</p>
-            <p className="notice mt-6" data-reveal>{t('ar.note')}</p>
-          </div>
-          <div data-reveal>
-            <ArkForm variant="partner" />
-          </div>
+        <div className="flex flex-col items-center gap-4 mt-10" data-reveal>
+          <Rich as="h3" html={s('partners.ctaTitle')} className="text-2xl md:text-3xl font-semibold m-0" />
+          <Link to="/get-involved?area=partnership#join" className="btn btn-gold">{s('common.becomePartner')} <i className="ri-arrow-right-line" /></Link>
         </div>
-      </section>
-
-      <section className="band band-ink !py-14">
-        <div className="band-inner flex flex-col sm:flex-row justify-between items-start sm:items-center gap-5">
-          <p className="m-0 max-w-[56ch] text-sm text-foreground-300" data-reveal>{t('pt.phil.p1')}</p>
-          <div className="link-row !mt-0" data-reveal>
-            <Link className="cta" to="/contact?reason=2">{t('nav.contact')} <i className="ri-arrow-right-line"></i></Link>
-          </div>
-        </div>
-      </section>
-    </PageShell>
+      </Panel>
+    </>
   );
 }
