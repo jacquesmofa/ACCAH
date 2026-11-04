@@ -1,52 +1,61 @@
-import { useState, type FormEvent } from 'react';
+export const WEB3_KEY = '687b6788-72db-43ea-9b30-5358c1311f65';
+export const FORM_EMAIL = 'african.canadian.arkofhope@gmail.com';
+const WEB3_URL = 'https://api.web3forms.com/submit';
 
-export type FormStatus = 'idle' | 'sending' | 'success' | 'error';
-export const HONEYPOT = 'website_alt';
+export type SendResult = { ok: boolean; message: string };
+
+const readMessage = (parsed: Record<string, unknown> | null): string => {
+  if (!parsed) return '';
+  const candidates = [parsed.message, parsed.meta];
+  for (const c of candidates) {
+    if (typeof c === 'string' && c) return c;
+    if (c && typeof c === 'object') {
+      const detail = (c as Record<string, unknown>).message || (c as Record<string, unknown>).detail;
+      if (typeof detail === 'string' && detail) return detail;
+    }
+  }
+  return '';
+};
 
 /**
- * Submits a form as x-www-form-urlencoded to the built-in Forms endpoint.
- * validate() receives the FormData and returns a map of field errors (empty = valid).
+ * Sends any website form straight to the organization inbox through Web3Forms.
+ * Every form uses its own hidden subject line so the inbox stays easy to triage.
  */
-export default function useFormSubmit(url: string, validate: (fd: FormData) => Record<string, string>) {
-  const [status, setStatus] = useState<FormStatus>('idle');
-  const [formError, setFormError] = useState('');
-  const [errors, setErrors] = useState<Record<string, string>>({});
+export async function sendToInbox(fd: FormData, subject: string, replyEmail?: string): Promise<SendResult> {
+  const body = new URLSearchParams();
+  body.append('access_key', WEB3_KEY);
+  body.append('subject', subject);
+  body.append('from_name', 'Ark of Hope Website');
+  if (replyEmail) body.append('replyto', replyEmail);
 
-  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const form = e.currentTarget;
-    const fd = new FormData(form);
-    const trap = String(fd.get(HONEYPOT) || '').trim();
-    if (trap) { setStatus('success'); return; }
-    const errs = validate(fd);
-    setErrors(errs);
-    if (Object.keys(errs).length) {
-      const first = form.querySelector<HTMLElement>(`[name="${Object.keys(errs)[0]}"]`);
-      first?.focus();
-      return;
-    }
-    const body = new URLSearchParams();
-    fd.forEach((v, k) => { if (k !== HONEYPOT && typeof v === 'string') body.append(k, v); });
-    setStatus('sending'); setFormError('');
+  fd.forEach((value, key) => {
+    if (key === 'website_alt' || key === 'botcheck') return;
+    const text = String(value).trim();
+    if (text) body.append(key, text);
+  });
+
+  try {
+    const response = await fetch(WEB3_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded', Accept: 'application/json' },
+      body: body.toString(),
+    });
+    const responseText = await response.text();
+    let parsed: Record<string, unknown> | null = null;
     try {
-      const response = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body.toString() });
-      const responseText = await response.text();
-      let parsed: { code?: string; message?: string; meta?: { message?: string; detail?: unknown } } | null = null;
-      try { parsed = JSON.parse(responseText); } catch { parsed = null; }
-      const serverMsg = String(parsed?.meta?.message || parsed?.message || (parsed?.meta?.detail ?? '') || responseText || '');
-      if (response.ok && parsed?.code === 'OK' && !/spam/i.test(serverMsg)) {
-        setStatus('success'); form.reset();
-      } else {
-        setFormError(serverMsg && serverMsg.length < 200 ? serverMsg : '');
-        setStatus('error');
-      }
-    } catch (err) {
-      setFormError(err instanceof Error ? err.message : '');
-      setStatus('error');
+      parsed = JSON.parse(responseText) as Record<string, unknown>;
+    } catch {
+      parsed = null;
     }
-  };
-
-  return { status, setStatus, formError, errors, onSubmit };
+    const message = readMessage(parsed);
+    const succeeded = response.ok && parsed?.success === true;
+    if (succeeded) return { ok: true, message: '' };
+    return { ok: false, message };
+  } catch {
+    return { ok: false, message: '' };
+  }
 }
 
-export const isEmail = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+export const isEmail = (value: string): boolean => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+
+export const readTrap = (fd: FormData, name: string): boolean => String(fd.get(name) || '').trim().length > 0;

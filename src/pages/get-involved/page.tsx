@@ -1,66 +1,58 @@
-import { Link, useSearchParams } from 'react-router-dom';
-import useTx from '@/hooks/useTx';
-import usePageMeta from '@/hooks/usePageMeta';
-import Rich from '@/components/base/Rich';
-import Panel from '@/components/feature/Panel';
-import VolunteerForm from '@/components/feature/forms/VolunteerForm';
-import { IMG } from '@/mocks/media';
+import { useTranslation } from 'react-i18next';
+import PageShell from '@/components/feature/PageShell';
+import PageHero from '@/components/base/PageHero';
+import ArkForm from '@/components/feature/ArkForm';
 
-interface CardItem { t: string; d: string; icon: string; href: string }
-
-export default function GetInvolved() {
-  usePageMeta('involved');
-  const { s, o } = useTx();
-  const cards = o<CardItem[]>('involved.cards');
-  const [params] = useSearchParams();
-  const preset = params.get('area') === 'partnership' ? 4 : undefined;
-
+export default function InvolvedPage() {
+  const { t } = useTranslation();
   return (
-    <>
-      <Panel side="left" img={IMG.involvedHero} alt="Volunteers setting a long table with gold place cards and candles" wide>
-        <div className="max-w-[820px] flex flex-col gap-4">
-          <p className="stamp" data-reveal>{s('involved.stamp')}</p>
-          <Rich as="h1" html={s('involved.title')} data-reveal />
-          <p className="sub max-w-[52ch]" data-reveal>{s('involved.sub')}</p>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
-            {cards.map((c) => {
-              const inner = (
-                <>
-                  <span className="w-11 h-11 rounded-full flex items-center justify-center" style={{ border: '1px solid var(--accent)', color: 'var(--accent)' }}><i className={`${c.icon} text-lg`} /></span>
-                  <h2 className="text-lg font-semibold mt-4 mb-1">{c.t}</h2>
-                  <p className="text-sm m-0" style={{ color: 'var(--muted)' }}>{c.d}</p>
-                  <span className="gold-line" />
-                </>
-              );
-              return c.href.startsWith('#')
-                ? <a key={c.t} href={c.href} className="card p-5 no-underline cursor-pointer" data-reveal>{inner}</a>
-                : <Link key={c.t} to={c.href} className="card p-5 no-underline cursor-pointer" data-reveal>{inner}</Link>;
-            })}
+    <PageShell title={t('seo.involved')} description={t('meta.involved')} metaKey="involved">
+      <PageHero
+        stamp={t('iv.stamp')}
+        title={t('iv.h1')}
+        sub={t('iv.sub')}
+        image="https://readdy.ai/api/search-image?query=Cinematic%20wide%20photograph%20of%20volunteers%20setting%20up%20chairs%20and%20tables%20in%20a%20glowing%20community%20hall%20before%20an%20evening%20gathering%2C%20warm%20golden%20lamp%20light%2C%20deep%20teal%20shadows%2C%20welcoming%20atmosphere%2C%20editorial%20documentary%20style&width=2000&height=1125&seq=page-involved-hero-01&orientation=landscape"
+        alt={t('iv.alt')}
+      />
+
+      <section className="band band-light">
+        <div className="band-inner grid-two items-start">
+          <div>
+            <p className="eyebrow" data-reveal>{t('iv.vol.eyebrow')}</p>
+            <h2 className="sec mt-3" data-reveal>{t('iv.vol.h')}</h2>
+            <p className="lede mt-4" data-reveal>{t('iv.vol.p')}</p>
+          </div>
+          <div data-reveal>
+            <ArkForm variant="volunteer" />
           </div>
         </div>
-      </Panel>
+      </section>
 
-      <Panel id="join" side="full" img={IMG.aboutValues} alt="Women applauding a graduate in a warm hall" wide>
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-14 items-center w-full max-w-[1200px] mx-auto">
-          <div className="lg:col-span-2 flex flex-col gap-4">
-            <p className="stamp" data-reveal>{s('involved.formStamp')}</p>
-            <Rich as="h2" html={s('involved.formTitle')} data-reveal />
-            <p className="sub" data-reveal>{s('form.supportHelp')}</p>
+      <section id="experience-form" className="band band-cream scroll-mt-24">
+        <div className="band-inner grid-two items-start">
+          <div>
+            <p className="eyebrow" data-reveal>{t('iv.exp.eyebrow')}</p>
+            <h2 className="sec mt-3" data-reveal>{t('iv.exp.h')}</h2>
+            <p className="lede mt-4" data-reveal>{t('iv.exp.p')}</p>
           </div>
-          <div className="lg:col-span-3"><VolunteerForm preset={preset} /></div>
+          <div data-reveal>
+            <ArkForm variant="experience" />
+          </div>
         </div>
-      </Panel>
+      </section>
 
-      <Panel id="donate" side="left" img={IMG.donate} alt="Hands of women of different generations holding a glowing candle together" accent="♛">
-        <p className="stamp" data-reveal>{s('involved.donateStamp')}</p>
-        <Rich as="h2" html={s('involved.donateTitle')} data-reveal />
-        <p className="sub" data-reveal>{s('involved.donate')}</p>
-        <div data-reveal>
-          {/* TODO: connect to CanadaHelps / Stripe / client's donation processor */}
-          <a href="#donate" className="btn btn-gold !min-h-[56px] !px-8 text-base">{s('common.donateNow')} <i className="ri-heart-fill" /></a>
+      <section className="band band-light">
+        <div className="band-inner grid-two items-start">
+          <div>
+            <p className="eyebrow" data-reveal>{t('iv.amb.eyebrow')}</p>
+            <h2 className="sec mt-3" data-reveal>{t('iv.amb.h')}</h2>
+            <p className="lede mt-4" data-reveal>{t('iv.amb.p')}</p>
+          </div>
+          <div data-reveal>
+            <ArkForm variant="ambassador" />
+          </div>
         </div>
-        <p className="text-xs" style={{ color: 'var(--muted)' }} data-reveal>{s('involved.receipt')}</p>
-      </Panel>
-    </>
+      </section>
+    </PageShell>
   );
 }
