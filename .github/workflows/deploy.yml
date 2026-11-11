@@ -78,7 +78,9 @@ jobs:
           if [ $RC -ne 0 ]; then echo "::error::Could not log in to FTP with these secrets: $(echo "$LIST" | tail -2)"; exit 1; fi
           NAMES=$(echo "$LIST" | sed 's#/$##' | grep -v '^\.\{1,2\}$' | sort | tr '\n' ' ')
           echo "The FTP account opens on a folder containing: ${NAMES:0:400}" | tee -a "$GITHUB_STEP_SUMMARY"
-          if echo "$LIST" | sed 's#/$##' | grep -qx "$SITE_FOLDER"; then
+          if echo "$LIST" | grep -qx "index.html"; then
+            D="./" # the account opens in the live site's folder
+          elif echo "$LIST" | sed 's#/$##' | grep -qx "$SITE_FOLDER"; then
             D="/$SITE_FOLDER/"
           elif echo "$LIST" | sed 's#/$##' | grep -qxE 'public_html|mail|etc|tmp|logs'; then
             echo "::error::This FTP account opens at the top of the hosting account, and no folder named $SITE_FOLDER is there. Set the repo variable FTP_SERVER_DIR to the site's folder (e.g. /$SITE_FOLDER/), or use an FTP account whose folder is the site's folder."
