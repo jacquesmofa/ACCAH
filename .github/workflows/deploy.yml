@@ -1,0 +1,121 @@
+name: 🚀 Build and Deploy — African and Canadian Community Ark of Hope (ACCAH)
+
+# How it works (plain words):
+# - Every change pushed to main is built. If the build fails, nothing is uploaded.
+# - The finished site (folder out/) is uploaded to HostGator by FTPS, then the workflow
+#   opens https://accah.org and checks the new version is really there.
+# - "Run workflow" (Actions tab) re-publishes by hand.
+# Settings (GitHub > Settings > Secrets and variables > Actions):
+#   Secrets   FTP_SERVER = gator3095.hostgator.com (host only), FTP_USERNAME, FTP_PASSWORD
+#   Variables (optional) SITE_URL (default https://accah.org),
+#             FTP_SERVER_DIR (folder on the server; found automatically when not set),
+#             FTP_PROTOCOL = ftp only if ftps ever fails.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: false # queue back-to-back saves instead of cutting an upload short
+
+env:
+  SITE_URL: ${{ vars.SITE_URL || 'https://accah.org' }}
+  SITE_FOLDER: accah.org # the domain's folder in cPanel (used only when the FTP account opens at the top of the hosting account)
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: 🚚 Checkout code
+        uses: actions/checkout@v5
+
+      - name: 🏗️ Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: 📦 Install exact dependency versions
+        run: npm ci
+
+      - name: 🔨 Build (site + one share-preview page per address + sitemap)
+        run: npm run build
+
+      - name: 🔐 Check FTP settings
+        id: secrets
+        if: github.event_name != 'pull_request'
+        env:
+          S: ${{ secrets.FTP_SERVER }}
+          U: ${{ secrets.FTP_USERNAME }}
+          P: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          if [ -z "$S" ] || [ -z "$U" ] || [ -z "$P" ]; then
+            echo "::warning::FTP secrets are not set — the build passed but nothing was uploaded."
+            echo "ok=false" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          case "$S" in *://*|*/*|*" "*) echo "::error::FTP_SERVER must be only the host name: gator3095.hostgator.com (no ftp://, no folder, no spaces)"; exit 1;; esac
+          getent hosts "$S" >/dev/null || { echo "::error::FTP_SERVER is not a real server name (${#S} characters). Re-type it exactly: gator3095.hostgator.com"; exit 1; }
+          echo "ok=true" >> "$GITHUB_OUTPUT"
+
+      - name: 📁 Find the site's folder on the server
+        id: dir
+        if: steps.secrets.outputs.ok == 'true'
+        env:
+          S: ${{ secrets.FTP_SERVER }}
+          U: ${{ secrets.FTP_USERNAME }}
+          P: ${{ secrets.FTP_PASSWORD }}
+          OVERRIDE: ${{ vars.FTP_SERVER_DIR }}
+        run: |
+          if [ -n "$OVERRIDE" ]; then echo "dir=$OVERRIDE" >> "$GITHUB_OUTPUT"; echo "Folder from FTP_SERVER_DIR: $OVERRIDE" | tee -a "$GITHUB_STEP_SUMMARY"; exit 0; fi
+          sudo apt-get install -y -qq lftp >/dev/null 2>&1
+          set +e
+          LIST=$(lftp -c "set ftp:ssl-force true; set net:max-retries 2; set net:timeout 25; open -u \"$U\",\"$P\" \"$S\"; cls -1a" 2>&1); RC=$?
+          set -e
+          if [ $RC -ne 0 ]; then echo "::error::Could not log in to FTP with these secrets: $(echo "$LIST" | tail -2)"; exit 1; fi
+          NAMES=$(echo "$LIST" | sed 's#/$##' | grep -v '^\.\{1,2\}$' | sort | tr '\n' ' ')
+          echo "The FTP account opens on a folder containing: ${NAMES:0:400}" | tee -a "$GITHUB_STEP_SUMMARY"
+          if echo "$LIST" | sed 's#/$##' | grep -qx "$SITE_FOLDER"; then
+            D="/$SITE_FOLDER/"
+          elif echo "$LIST" | sed 's#/$##' | grep -qxE 'public_html|mail|etc|tmp|logs'; then
+            echo "::error::This FTP account opens at the top of the hosting account, and no folder named $SITE_FOLDER is there. Set the repo variable FTP_SERVER_DIR to the site's folder (e.g. /$SITE_FOLDER/), or use an FTP account whose folder is the site's folder."
+            exit 1
+          else
+            D="./"
+          fi
+          echo "dir=$D" >> "$GITHUB_OUTPUT"
+          echo "Uploading into: $D" | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: 📂 Upload to HostGator
+        if: steps.secrets.outputs.ok == 'true'
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ${{ vars.FTP_PROTOCOL || 'ftps' }}
+          local-dir: ./out/
+          server-dir: ${{ steps.dir.outputs.dir }}
+          timeout: 120000
+          exclude: |
+            **/*.map
+            **/.gitkeep
+
+      - name: ✅ Check the new version is live
+        if: steps.secrets.outputs.ok == 'true'
+        run: |
+          ASSET=$(grep -o 'assets/index-[^"]*\.js' out/index.html | head -1)
+          for i in 1 2 3 4 5 6 7 8; do
+            if curl -fsSL -H 'Cache-Control: no-cache' "$SITE_URL/?v=${GITHUB_SHA::7}" | grep -q "$ASSET"; then
+              echo "✅ Live check passed: $SITE_URL serves this build ($ASSET)" | tee -a "$GITHUB_STEP_SUMMARY"
+              for p in $(grep -o '<loc>[^<]*</loc>' out/sitemap.xml | sed 's#<loc>##;s#</loc>##' | head -20); do
+                C=$(curl -s -o /dev/null -w '%{http_code}' "$p"); echo "$C  $p" | tee -a "$GITHUB_STEP_SUMMARY"
+              done
+              exit 0
+            fi
+            echo "Not visible yet, retrying in 10s ($i/8)"; sleep 10
+          done
+          echo "::warning::Uploaded, but $SITE_URL does not show the new build yet. Check the domain points at this folder (or set the SITE_URL variable)."

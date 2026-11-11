@@ -26,12 +26,12 @@ export const SITE = {
   name: 'African and Canadian Community Ark of Hope',
   shortName: 'Ark of Hope',
   tagline: 'A Safe Harbour. A Fair Path. A Stronger Future.',
-  domain: 'https://arkofhope.ca',
+  domain: 'https://accah.org',
   email: 'african.canadian.arkofhope@gmail.com',
   brandColor: '#F2B56B',
   themeColor: '#0C1A1C',
   backgroundColor: '#0C1A1C',
-  logo: 'https://readdy.ai/api/search-image?query=Minimal%20app%20icon%20of%20a%20simple%20gold%20sailboat%20mark%20centred%20on%20a%20deep%20teal%20background%20with%20a%20thin%20gold%20ring%2C%20flat%20vector%20look%2C%20bold%20and%20readable%20at%20small%20sizes&width=512&height=512&seq=ark-app-icon-512&orientation=squarish',
+  logo: 'https://accah.org/icon-512.png',
   locale: { en: 'en_CA', fr: 'fr_CA' } as Record<Lang, string>,
   /** No social profiles exist on the site yet, so sameAs is intentionally empty. */
   social: [] as string[],
@@ -67,17 +67,24 @@ export const NAV_ITEMS: { path: string; labelKey: string }[] = [
   { path: '/donate', labelKey: 'nav.donate' },
 ];
 
+// Branded 1200 x 630 share cards, one per page (public/social/*.jpg, made from the site's own colours and type).
+const card = (key: string) => `https://accah.org/social/${key}.jpg`;
 const OG = {
-  home: 'https://readdy.ai/api/search-image?query=Cinematic%20wide%20photograph%20of%20a%20warm%20community%20hall%20at%20blue%20hour%20with%20golden%20lit%20windows%20beside%20calm%20dark%20water%2C%20deep%20teal%20shadows%20and%20honey%20gold%20light%2C%20calm%20and%20hopeful%20editorial%20mood&width=1200&height=630&seq=og-home-2026&orientation=landscape',
-  about: 'https://readdy.ai/api/search-image?query=Cinematic%20wide%20photograph%20of%20diverse%20community%20members%20gathered%20in%20a%20sunlit%20hall%20listening%20attentively%2C%20warm%20golden%20window%20light%2C%20deep%20teal%20shadows%2C%20dignified%20documentary%20style&width=1200&height=630&seq=og-about-2026&orientation=landscape',
-  work: 'https://readdy.ai/api/search-image?query=Cinematic%20wide%20photograph%20of%20hands%20around%20a%20wooden%20table%20with%20notes%20and%20tea%20cups%2C%20bilingual%20documents%2C%20golden%20afternoon%20light%2C%20deep%20teal%20shadows%2C%20editorial%20still%20life&width=1200&height=630&seq=og-work-2026&orientation=landscape',
-  ark: 'https://readdy.ai/api/search-image?query=Cinematic%20wide%20photograph%20of%20a%20confident%20African%20woman%20professional%20holding%20a%20diploma%20folder%20in%20a%20modern%20office%20at%20dusk%2C%20amber%20lamp%20glow%2C%20deep%20teal%20shadows%2C%20dignified%20mood&width=1200&height=630&seq=og-ark-2026&orientation=landscape',
-  involved: 'https://readdy.ai/api/search-image?query=Cinematic%20wide%20photograph%20of%20volunteers%20setting%20up%20chairs%20in%20a%20glowing%20community%20hall%20before%20an%20evening%20gathering%2C%20warm%20golden%20light%2C%20deep%20teal%20shadows%2C%20welcoming%20mood&width=1200&height=630&seq=og-involved-2026&orientation=landscape',
-  contact: 'https://readdy.ai/api/search-image?query=Cinematic%20wide%20photograph%20of%20calm%20dark%20teal%20water%20at%20dusk%20with%20a%20thin%20line%20of%20honey%20gold%20light%20on%20the%20horizon%2C%20vast%20empty%20sky%2C%20minimal%20contemplative%20seascape&width=1200&height=630&seq=og-contact-2026&orientation=landscape',
+  home: card('home'),
+  about: card('about'),
+  work: card('work'),
+  ark: card('ark'),
+  impact: card('impact'),
+  partners: card('partners'),
+  involved: card('involved'),
+  donate: card('donate'),
+  news: card('news'),
+  contact: card('contact'),
+  privacy: card('privacy'),
+  access: card('access'),
 };
 
-export const SQUARE_OG_IMAGE =
-  'https://readdy.ai/api/search-image?query=Cinematic%20square%20photograph%20of%20a%20golden%20lit%20community%20hall%20beside%20still%20dark%20water%20at%20blue%20hour%2C%20deep%20teal%20sky%2C%20honey%20gold%20reflections%2C%20centred%20calm%20composition&width=1200&height=1200&seq=og-square-2026&orientation=squarish';
+export const SQUARE_OG_IMAGE = 'https://accah.org/icon-512.png';
 
 export type PageMeta = {
   title: string;
@@ -119,12 +126,12 @@ export const PAGE_META: Record<Lang, Record<PageKey, PageMeta>> = {
     impact: entry(
       'Impact and Systems Change: How We Measure It | Ark of Hope',
       'Why systems change matters, the six-step approach behind our work and the indicators we use to measure progress with community partners.',
-      OG.home,
+      OG.impact,
     ),
     partners: entry(
       'Partners: Cross-Sector Collaboration | Ark of Hope',
       'Cross-sector partnership and eight ways to work with African and Canadian Community Ark of Hope, from advisory roles to program delivery.',
-      OG.work,
+      OG.partners,
     ),
     involved: entry(
       'Get Involved: Volunteer and Partner With Us | Ark of Hope',
@@ -134,12 +141,12 @@ export const PAGE_META: Record<Lang, Record<PageKey, PageMeta>> = {
     donate: entry(
       'Donate: Turn Hope Into Opportunity | Ark of Hope',
       'Turn hope into opportunity with one-time gifts, monthly giving, activity sponsorship and in-kind contributions that support equitable pathways.',
-      OG.involved,
+      OG.donate,
     ),
     news: entry(
       'News and Resources: Updates and Learning | Ark of Hope',
       'Organizational updates, community opportunities, learning resources and bilingual publications from African and Canadian Community Ark of Hope.',
-      OG.work,
+      OG.news,
     ),
     contact: entry(
       'Contact Us and Frequently Asked Questions | Ark of Hope',
@@ -149,12 +156,12 @@ export const PAGE_META: Record<Lang, Record<PageKey, PageMeta>> = {
     privacy: entry(
       'Privacy: How We Protect Your Information | Ark of Hope',
       'How we collect, use, protect and retain personal information, and how to reach us with a privacy question or request. Plain-language summary.',
-      OG.about,
+      OG.privacy,
     ),
     access: entry(
       'Accessibility Statement and Feedback | Ark of Hope',
       'Our accessibility commitment, how to request information in an alternate format and how to tell us about a barrier you encounter on this site.',
-      OG.about,
+      OG.access,
     ),
     notFound: entry(
       'Page Not Found (404) | Ark of Hope',
@@ -187,12 +194,12 @@ export const PAGE_META: Record<Lang, Record<PageKey, PageMeta>> = {
     impact: entry(
       'Impact et changement systémique | Arche de l’espoir',
       'Pourquoi le changement systémique compte, la démarche en six étapes qui guide notre travail et les indicateurs utilisés pour mesurer les progrès.',
-      OG.home,
+      OG.impact,
     ),
     partners: entry(
       'Partenariats intersectoriels | Arche de l’espoir',
       'Des partenariats intersectoriels et huit façons de collaborer avec l’Arche de l’espoir des communautés africaines et canadiennes, du rôle-conseil à la réalisation de programmes.',
-      OG.work,
+      OG.partners,
     ),
     involved: entry(
       'S’impliquer : bénévolat et partenariats | Arche de l’espoir',
@@ -202,12 +209,12 @@ export const PAGE_META: Record<Lang, Record<PageKey, PageMeta>> = {
     donate: entry(
       'Faire un don : de l’espoir à l’occasion | Arche de l’espoir',
       'Transformez l’espoir en possibilités grâce à un don unique, un don mensuel, le parrainage d’une activité ou une contribution en nature.',
-      OG.involved,
+      OG.donate,
     ),
     news: entry(
       'Nouvelles et ressources | Arche de l’espoir',
       'Nouvelles de l’organisme, occasions communautaires, ressources d’apprentissage et publications bilingues de l’Arche de l’espoir.',
-      OG.work,
+      OG.news,
     ),
     contact: entry(
       'Nous joindre et questions fréquentes | Arche de l’espoir',
@@ -217,12 +224,12 @@ export const PAGE_META: Record<Lang, Record<PageKey, PageMeta>> = {
     privacy: entry(
       'Confidentialité : protéger vos renseignements | Arche de l’espoir',
       'Comment nous recueillons, utilisons, protégeons et conservons les renseignements personnels, et comment nous joindre pour une question de confidentialité.',
-      OG.about,
+      OG.privacy,
     ),
     access: entry(
       'Déclaration d’accessibilité | Arche de l’espoir',
       'Notre engagement envers l’accessibilité, la façon de demander de l’information dans un autre format et la façon de nous signaler un obstacle sur ce site.',
-      OG.about,
+      OG.access,
     ),
     notFound: entry(
       'Page introuvable (404) | Arche de l’espoir',

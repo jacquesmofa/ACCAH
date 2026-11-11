@@ -1,0 +1,105 @@
+{
+  "_help": "Share previews (Facebook, WhatsApp, LinkedIn, X...) and the sitemap, used by scripts/social-pages.mjs at every build. Keep the English titles/descriptions in step with src/lib/seo.ts (which also holds the French).",
+  "site": {
+    "name": "African and Canadian Community Ark of Hope",
+    "url": "https://accah.org",
+    "locale": "en_CA",
+    "localeAlternate": "fr_CA",
+    "image": "https://accah.org/social/home.jpg",
+    "imageAlt": "African and Canadian Community Ark of Hope: a safe harbour, a fair path, a stronger future"
+  },
+  "pages": [
+    {
+      "path": "/",
+      "title": "African and Canadian Community Ark of Hope",
+      "description": "A bilingual nonprofit advancing equity, opportunity and belonging for women, newcomers, families, persons with disabilities and underserved communities.",
+      "image": "https://accah.org/social/home.jpg",
+      "imageAlt": "African and Canadian Community Ark of Hope"
+    },
+    {
+      "path": "/about",
+      "title": "About Us: Mission, Vision and Values | Ark of Hope",
+      "description": "Learn about our mission, vision, values and our commitment to bilingual, accessible, community-led change across Canadian communities.",
+      "image": "https://accah.org/social/about.jpg",
+      "imageAlt": "About Us: Mission, Vision and Values | Ark of Hope"
+    },
+    {
+      "path": "/work",
+      "title": "Our Work: Equity and Inclusion Programs | Ark of Hope",
+      "description": "Explore our priority areas: women’s equality, newcomer inclusion, youth and family well-being, accessibility and systems change. See how we work.",
+      "image": "https://accah.org/social/work.jpg",
+      "imageAlt": "Our Work: Equity and Inclusion Programs | Ark of Hope"
+    },
+    {
+      "path": "/credentials-ark",
+      "title": "The Credentials ARK: Credential Recognition | Ark of Hope",
+      "description": "A systemic-change initiative addressing credential recognition, employment and leadership barriers facing newcomer and racialized professional women.",
+      "image": "https://accah.org/social/ark.jpg",
+      "imageAlt": "The Credentials ARK: Credential Recognition | Ark of Hope"
+    },
+    {
+      "path": "/impact",
+      "title": "Impact and Systems Change: How We Measure It | Ark of Hope",
+      "description": "Why systems change matters, the six-step approach behind our work and the indicators we use to measure progress with community partners.",
+      "image": "https://accah.org/social/impact.jpg",
+      "imageAlt": "Impact and Systems Change: How We Measure It | Ark of Hope"
+    },
+    {
+      "path": "/partners",
+      "title": "Partners: Cross-Sector Collaboration | Ark of Hope",
+      "description": "Cross-sector partnership and eight ways to work with African and Canadian Community Ark of Hope, from advisory roles to program delivery.",
+      "image": "https://accah.org/social/partners.jpg",
+      "imageAlt": "Partners: Cross-Sector Collaboration | Ark of Hope"
+    },
+    {
+      "path": "/get-involved",
+      "title": "Get Involved: Volunteer and Partner With Us | Ark of Hope",
+      "description": "Volunteer, share your experience, build partnerships and help create more equitable community and professional pathways for women and newcomers.",
+      "image": "https://accah.org/social/involved.jpg",
+      "imageAlt": "Get Involved: Volunteer and Partner With Us | Ark of Hope"
+    },
+    {
+      "path": "/donate",
+      "title": "Donate: Turn Hope Into Opportunity | Ark of Hope",
+      "description": "Turn hope into opportunity with one-time gifts, monthly giving, activity sponsorship and in-kind contributions that support equitable pathways.",
+      "image": "https://accah.org/social/donate.jpg",
+      "imageAlt": "Donate: Turn Hope Into Opportunity | Ark of Hope"
+    },
+    {
+      "path": "/news",
+      "title": "News and Resources: Updates and Learning | Ark of Hope",
+      "description": "Organizational updates, community opportunities, learning resources and bilingual publications from African and Canadian Community Ark of Hope.",
+      "image": "https://accah.org/social/news.jpg",
+      "imageAlt": "News and Resources: Updates and Learning | Ark of Hope"
+    },
+    {
+      "path": "/contact",
+      "title": "Contact Us and Frequently Asked Questions | Ark of Hope",
+      "description": "Contact our team, route your inquiry to the right person and read answers to the questions we are asked most often. We reply in English or French.",
+      "image": "https://accah.org/social/contact.jpg",
+      "imageAlt": "Contact Us and Frequently Asked Questions | Ark of Hope"
+    },
+    {
+      "path": "/privacy",
+      "title": "Privacy: How We Protect Your Information | Ark of Hope",
+      "description": "How we collect, use, protect and retain personal information, and how to reach us with a privacy question or request. Plain-language summary.",
+      "image": "https://accah.org/social/privacy.jpg",
+      "imageAlt": "Privacy: How We Protect Your Information | Ark of Hope"
+    },
+    {
+      "path": "/accessibility",
+      "title": "Accessibility Statement and Feedback | Ark of Hope",
+      "description": "Our accessibility commitment, how to request information in an alternate format and how to tell us about a barrier you encounter on this site.",
+      "image": "https://accah.org/social/access.jpg",
+      "imageAlt": "Accessibility Statement and Feedback | Ark of Hope"
+    },
+    {
+      "path": "/404",
+      "title": "Page Not Found (404) | Ark of Hope",
+      "description": "This page could not be found. Use the menu to reach our home page, our programs, our resources or our contact information.",
+      "image": "https://accah.org/social/home.jpg",
+      "noindex": true,
+      "imageAlt": "Page Not Found (404) | Ark of Hope"
+    }
+  ]
+}

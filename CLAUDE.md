@@ -2,8 +2,8 @@
 
 Bilingual non-profit advancing equity, opportunity and belonging for women, newcomers, families, persons with disabilities and underserved communities.
 
-- Live domain: arkofhope.ca (found in code; confirm)
-- Host: ❓ not set up (no deploy workflow; `vercel.json` present but Vercel Hobby is not allowed for client sites)
+- Live domain: https://accah.org (the old code said arkofhope.ca; changed 11 Nov because accah.org is the domain on HostGator).
+- Host: HostGator (server `gator3095.hostgator.com`, cPanel user `irineashu`, site folder `/accah.org`).
 - Design and audience: see `brand-dna.md`. Placeholders: `PLACEHOLDERS.md` (create it when you find one).
 
 ## Studio rules (Jacques' web studio: apply to every task)
@@ -22,7 +22,14 @@ Bilingual non-profit advancing equity, opportunity and belonging for women, newc
 - Routes: `/`, `/about`, `/accessibility`, `/contact`, `/credentials-ark`, `/donate`, `/get-involved`, `/impact`, `/news`, `/partners`, `/privacy`, `/work`.
 
 ## Deploy
-- No deploy workflow yet. Add the studio FTP workflow (copy `jacquesmofa/SANKOFA/.github/workflows/deploy.yml`) once the client's host is known.
+- `.github/workflows/deploy.yml` (studio standard): push to `main` → `npm ci && npm run build` → FTPS upload of `out/` → live check of https://accah.org and every sitemap address.
+- Secrets `FTP_SERVER` (= gator3095.hostgator.com), `FTP_USERNAME`, `FTP_PASSWORD`. The workflow finds the site folder itself (FTP account rooted at the site folder → `./`; at the top of the hosting account → `/accah.org/`). Optional variables: `SITE_URL`, `FTP_SERVER_DIR`, `FTP_PROTOCOL`.
+- `public/.htaccess`: https, clean addresses (/about.html and /about/ → /about), one share-preview page per address, SPA fallback, caching.
+
+## Share previews and SEO
+- `src/content/seo.json` → `scripts/social-pages.mjs` (runs inside `npm run build`): writes one HTML file per page (e.g. `out/about.html`) with that page's title, description, canonical link and 1200×630 picture, plus `sitemap.xml` and the robots.txt sitemap line. Social apps never run JavaScript, so this is what Facebook, WhatsApp, LinkedIn and X show.
+- In the browser, `src/lib/seo.ts` (EN + FR) sets the same tags per page and language. Keep the English text in both files the same.
+- Share cards: `public/social/<page>.jpg`, made from the site's colours and type (no real photos exist yet; replace with real photos when the client sends them). App icons: `public/icon-*.png`, `apple-touch-icon.png`.
 
 ## Where things live
 - Pages: `src/pages/<page>/` (one folder per page, sections in `components/`). Routes: `src/router/`.
@@ -32,5 +39,4 @@ Bilingual non-profit advancing equity, opportunity and belonging for women, newc
 ## Known issues (found 10 Nov 2026)
 - 59 Readdy AI placeholder image URLs (`readdy.ai/api/search-image`) are still in the code. Replace them with real photos and track the rest in `PLACEHOLDERS.md`.
 - Some forms post to Readdy's form service (`readdy.ai/api/form`). Move them to Web3Forms with the client's email (studio standard) and test that a message actually arrives.
-- `out.zip` and the build folder `out/` are committed; remove them from git when convenient.
 - Design overlap with other clients: Same font stack as Crowned and NNAYA (same Readdy template). Must diverge.
