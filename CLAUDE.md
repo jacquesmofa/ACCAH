@@ -22,7 +22,7 @@ Bilingual non-profit advancing equity, opportunity and belonging for women, newc
 - Routes: `/`, `/about`, `/accessibility`, `/contact`, `/credentials-ark`, `/donate`, `/get-involved`, `/impact`, `/news`, `/partners`, `/privacy`, `/work`.
 
 ## Deploy
-- No deploy workflow yet. Add the studio FTP workflow (copy from CAWAP) once the client's host is known.
+- No deploy workflow yet. Add the studio FTP workflow (copy `jacquesmofa/SANKOFA/.github/workflows/deploy.yml`) once the client's host is known.
 
 ## Where things live
 - Pages: `src/pages/<page>/` (one folder per page, sections in `components/`). Routes: `src/router/`.
