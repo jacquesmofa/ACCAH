@@ -28,6 +28,8 @@ if (!site?.url || !site?.name) throw new Error('seo.json: site.url and site.name
 const siteUrl = site.url.replace(/\/+$/, '');
 
 const esc = (s = '') => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+// Editor uploads are saved as /media/uploads/x.jpg: share pictures must be full addresses.
+const abs = (u) => (u && !/^https?:\/\//.test(u) ? `${siteUrl}/${u.replace(/^\/+/, '')}` : u);
 const urlFor = (p) => (p === '/' ? `${siteUrl}/` : `${siteUrl}/${p.replace(/^\/+|\/+$/g, '')}`);
 const imgType = (u) => (/\.png($|\?)|f_png/.test(u) ? 'image/png' : /\.webp($|\?)|f_webp/.test(u) ? 'image/webp' : 'image/jpeg');
 
@@ -49,7 +51,7 @@ function headBlock(page) {
   const title = page.title || site.name;
   const description = page.description || site.description || '';
   const url = urlFor(page.path);
-  const image = page.image || site.image;
+  const image = abs(page.image || site.image);
   const imageAlt = page.imageAlt || (page.image ? title : site.imageAlt) || title;
   const robots = page.noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1';
   const L = [
@@ -69,8 +71,8 @@ function headBlock(page) {
       `<meta property="og:image" content="${esc(image)}" />`,
       `<meta property="og:image:secure_url" content="${esc(image)}" />`,
       `<meta property="og:image:type" content="${imgType(image)}" />`,
-      `<meta property="og:image:width" content="${page.imageWidth || site.imageWidth || 1200}" />`,
-      `<meta property="og:image:height" content="${page.imageHeight || site.imageHeight || 630}" />`,
+      `<meta property="og:image:width" content="${page.image ? page.imageWidth || 1200 : site.imageWidth || 1200}" />`,
+      `<meta property="og:image:height" content="${page.image ? page.imageHeight || 630 : site.imageHeight || 630}" />`,
       `<meta property="og:image:alt" content="${esc(imageAlt)}" />`,
     ] : []),
     `<meta name="twitter:card" content="${image ? 'summary_large_image' : 'summary'}" />`,
@@ -107,7 +109,7 @@ const today = new Date().toISOString().slice(0, 10);
 const urls = seo.pages.filter((p) => p?.path && !p.noindex && !p.path.includes(':') && !p.path.includes('*'));
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<!-- Generated from src/content/seo.json on every build. -->\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n${urls
   .map((p) => {
-    const img = p.image || (p.path === '/' ? site.image : '');
+    const img = abs(p.image || (p.path === '/' ? site.image : ''));
     return `  <url>\n    <loc>${esc(urlFor(p.path))}</loc>\n    <lastmod>${today}</lastmod>\n    <priority>${p.path === '/' ? '1.0' : '0.8'}</priority>${img ? `\n    <image:image><image:loc>${esc(img)}</image:loc></image:image>` : ''}\n  </url>`;
   })
   .join('\n')}\n</urlset>\n`;

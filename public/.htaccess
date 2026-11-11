@@ -1,6 +1,8 @@
 # African and Canadian Community Ark of Hope — HostGator (Apache) settings for the React site.
 
 DirectoryIndex index.html
+# Slashes are handled below, so a page and a folder can share a name (/giving and /giving/volunteer)
+DirectorySlash Off
 Options -Indexes -MultiViews
 AddType application/manifest+json .webmanifest
 
@@ -17,13 +19,17 @@ AddType application/manifest+json .webmanifest
   RewriteCond %1 !(^|/)index$
   RewriteRule ^ /%1 [R=301,L]
 
-  # /about/ -> /about (unless it is a real folder)
-  RewriteCond %{REQUEST_FILENAME} !-d
+  # /about/ -> /about (unless it is a real folder with its own index.html, e.g. /admin/)
+  RewriteCond %{REQUEST_FILENAME}/index.html !-f
   RewriteRule ^(.+)/$ /$1 [R=301,L]
 
   # Pages with their own share preview (about.html, contact.html...: see scripts/social-pages.mjs)
   RewriteCond %{REQUEST_FILENAME}.html -f
   RewriteRule ^(.*[^/])$ $1.html [L]
+
+  # Real folders with their own index.html get their slash: /admin -> /admin/
+  RewriteCond %{REQUEST_FILENAME}/index.html -f
+  RewriteRule ^(.*[^/])$ /$1/ [R=301,L]
 
   # Real files, and folders that have their own index.html (e.g. /admin/), are served as they are
   RewriteCond %{REQUEST_FILENAME} -f [OR]
@@ -47,6 +53,10 @@ AddType application/manifest+json .webmanifest
   <FilesMatch "\.html$">
     Header set Cache-Control "no-cache"
   </FilesMatch>
+  # The upload tool's bookkeeping file stays private
+  <Files ".ftp-deploy-sync-state.json">
+    Require all denied
+  </Files>
   # Source maps are for debugging only
   <FilesMatch "\.map$">
     Require all denied
