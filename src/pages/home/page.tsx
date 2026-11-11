@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 import PageShell from '@/components/feature/PageShell';
 import FilmChapter from './components/FilmChapter';
 import Manifesto from './components/Manifesto';
+import FoodSecurity from './components/FoodSecurity';
 import { FocusGrid, ChangePanel, ArkTeaser, ClosingCta, AboutIntro, ApproachPath, TakePart, NewsTeaser } from './components/HomeSections';
 
 export default function Home() {
@@ -13,6 +14,7 @@ export default function Home() {
       <AboutIntro />
       <FocusGrid />
       <ApproachPath />
+      <FoodSecurity />
       <ChangePanel />
       <ArkTeaser />
       <TakePart />
