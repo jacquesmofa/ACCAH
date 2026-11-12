@@ -8,7 +8,7 @@ const fr = {
     events: ["Événements | Crowned Women and Family Community Services", "Participez aux célébrations culturelles, ateliers d’autonomisation et tables rondes sur le leadership de CWFCS à Mississauga. Confirmez votre présence en ligne."],
     partners: ["Nos partenaires | CWFCS Mississauga", "Ensemble, nous accomplissons davantage. Devenez partenaire de CWFCS pour ouvrir des portes aux femmes, aux jeunes et aux familles de Mississauga et de Peel."],
     involved: ["S’impliquer : bénévolat, partenariat, don | CWFCS", "Joignez-vous à notre mission. Faites du bénévolat, devenez partenaire ou faites un don pour autonomiser les femmes et renforcer les familles à Mississauga."],
-    contact: ["Contactez CWFCS | 6850 Milcreek Drive, Mississauga", "Découvrez nos services et communiquez avec Crowned Women and Family Community Services à Mississauga. Envoyez une demande de service dès aujourd’hui."],
+    contact: ["Contactez CWFCS | 101 West Drive, Brampton", "Découvrez nos services et communiquez avec Crowned Women and Family Community Services à Mississauga. Envoyez une demande de service dès aujourd’hui."],
     notFound: ["Page introuvable | CWFCS", "La page que vous cherchez est introuvable. Retournez à l’accueil de Crowned Women and Family Community Services."],
   },
   nav: {

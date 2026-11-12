@@ -6,6 +6,7 @@ import PageHero from '@/components/base/PageHero';
 import ArkForm from '@/components/feature/ArkForm';
 import FaqSection from '@/components/feature/FaqSection';
 import { FORM_EMAIL } from '@/hooks/useFormSubmit';
+import { ADDRESS_LINES, CONTACT, MAP_URL } from '@/lib/contact';
 
 const ROUTES = [1, 2, 3, 4, 5, 6];
 
@@ -33,6 +34,7 @@ export default function ContactPage() {
         alt={t('cn.alt')}
       >
         <a className="cta" href={`mailto:${FORM_EMAIL}`}>{t('form.email')} <i className="ri-mail-line"></i></a>
+        <a className="cta cta-ghost" href={CONTACT.phoneHref}>{CONTACT.phone} <i className="ri-phone-line"></i></a>
       </PageHero>
 
       <section className="band band-cream">
@@ -71,19 +73,13 @@ export default function ContactPage() {
             </div>
             <div data-reveal>
               <p className="eyebrow">{t('cn.details.phone')}</p>
-              <p className="m-0 mt-2 text-base">{t('cn.details.phoneV')}</p>
+              <a className="mail-link !text-lg md:!text-xl mt-2" href={CONTACT.phoneHref}>{CONTACT.phone}</a>
             </div>
             <div data-reveal>
               <p className="eyebrow">{t('cn.details.address')}</p>
-              <p className="m-0 mt-2 text-base">{t('cn.details.addressV')}</p>
-            </div>
-            <div data-reveal>
-              <p className="eyebrow">{t('cn.details.hours')}</p>
-              <p className="m-0 mt-2 text-base">{t('cn.details.hoursV')}</p>
-            </div>
-            <div data-reveal>
-              <p className="eyebrow">{t('cn.details.social')}</p>
-              <p className="m-0 mt-2 text-base">{t('cn.details.socialV')}</p>
+              <a className="mt-2 block text-base hover:underline" href={MAP_URL} target="_blank" rel="noopener noreferrer">
+                {ADDRESS_LINES[0]}<br />{ADDRESS_LINES[1]}
+              </a>
             </div>
           </div>
         </div>

@@ -8,7 +8,7 @@ const en = {
     events: ["Events | Crowned Women and Family Community Services", "Join CWFCS cultural celebrations, empowerment workshops and leadership panel discussions across Mississauga. RSVP online."],
     partners: ["Our Partners | CWFCS Mississauga", "We achieve more together. Partner with CWFCS to open doors for women, youth and families across Mississauga and the Peel region."],
     involved: ["Get Involved: Volunteer, Partner, Donate | CWFCS", "Join our mission. Volunteer, become a partner or donate to empower women and strengthen families in Mississauga."],
-    contact: ["Contact CWFCS | 6850 Milcreek Drive, Mississauga", "Explore our services and get in touch with Crowned Women and Family Community Services in Mississauga. Send a service inquiry today."],
+    contact: ["Contact CWFCS | 101 West Drive, Brampton", "Explore our services and get in touch with Crowned Women and Family Community Services in Mississauga. Send a service inquiry today."],
     notFound: ["Page Not Found | CWFCS", "The page you are looking for could not be found. Return to the Crowned Women and Family Community Services home page."],
   },
   nav: {

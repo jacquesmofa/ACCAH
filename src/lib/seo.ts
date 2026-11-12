@@ -1,8 +1,8 @@
 /**
  * Single source of truth for the site's technical SEO layer.
  * Every value here is taken from content that is visible on the site.
- * Nothing is invented: no address, phone number, rating, price or social account
- * is declared anywhere, because none of them exist on the site yet.
+ * Nothing is invented: the address and phone come from the client (11 Nov 2026, src/lib/contact.ts);
+ * no rating, price or social account is declared, because none exist yet.
  */
 
 export type Lang = 'en' | 'fr';
@@ -28,6 +28,7 @@ export const SITE = {
   tagline: 'A Safe Harbour. A Fair Path. A Stronger Future.',
   domain: 'https://accah.org',
   email: 'african.canadian.arkofhope@gmail.com',
+  telephone: '+1-438-282-7441',
   brandColor: '#F2B56B',
   themeColor: '#0C1A1C',
   backgroundColor: '#0C1A1C',

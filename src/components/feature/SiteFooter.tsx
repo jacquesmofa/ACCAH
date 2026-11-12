@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { FORM_EMAIL } from '@/hooks/useFormSubmit';
+import { ADDRESS_LINES, CONTACT, MAP_URL } from '@/lib/contact';
 
 const PRIMARY = [
   { to: '/', k: 'home' },
@@ -59,11 +60,18 @@ export default function SiteFooter() {
         <div data-reveal>
           <p className="stamp">{t('ft.contact')}</p>
           <a href={`mailto:${FORM_EMAIL}`} className="nav-link text-sm text-foreground-300 mt-4 inline-block break-all">{FORM_EMAIL}</a>
-          <ul className="list-none p-0 mt-3 grid gap-1.5 text-xs text-foreground-500">
-            <li>{t('ft.phone')}</li>
-            <li>{t('ft.address')}</li>
-            <li>{t('ft.hours')}</li>
-            <li>{t('ft.social')}</li>
+          <ul className="list-none p-0 mt-3 grid gap-2 text-sm text-foreground-300">
+            <li>
+              <a href={CONTACT.phoneHref} className="nav-link text-foreground-300 inline-flex items-center gap-2">
+                <i className="ri-phone-line" aria-hidden="true"></i>{CONTACT.phone}
+              </a>
+            </li>
+            <li>
+              <a href={MAP_URL} target="_blank" rel="noopener noreferrer" className="nav-link text-foreground-300 inline-flex items-start gap-2">
+                <i className="ri-map-pin-line mt-0.5" aria-hidden="true"></i>
+                <span>{ADDRESS_LINES[0]}<br />{ADDRESS_LINES[1]}</span>
+              </a>
+            </li>
           </ul>
           <div className="mt-4 flex items-center gap-2 text-xs text-foreground-500">
             <button type="button" onClick={() => i18n.changeLanguage('fr')} aria-pressed={isFr}

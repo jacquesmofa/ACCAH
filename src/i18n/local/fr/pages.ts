@@ -266,7 +266,7 @@ const pages: Record<string, string> = {
   'cn.details.h': 'Coordonnées',
   'cn.details.email': 'Courriel',
   'cn.details.phone': 'Téléphone',
-  'cn.details.address': 'Adresse postale',
+  'cn.details.address': 'Adresse',
   'cn.details.hours': 'Heures de service',
   'cn.details.social': 'Liens sociaux',
   'cn.details.phoneV': '[Téléphone : à ajouter]',
