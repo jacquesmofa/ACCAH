@@ -11,6 +11,7 @@ const LINKS = [
   { to: '/partners', k: 'partners' },
   { to: '/get-involved', k: 'involved' },
   { to: '/news', k: 'news' },
+  { to: '/gallery', k: 'gallery' },
   { to: '/contact', k: 'contact' },
 ];
 

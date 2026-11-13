@@ -16,6 +16,7 @@ const home: Record<string, string> = {
   'nav.partners': 'Partenaires',
   'nav.involved': 'S’impliquer',
   'nav.news': 'Nouvelles et ressources',
+  'nav.gallery': 'Galerie',
   'nav.contact': 'Nous joindre',
   'nav.donate': 'Faire un don',
   'nav.langFr': 'Français',

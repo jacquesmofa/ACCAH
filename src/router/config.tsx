@@ -10,6 +10,7 @@ import InvolvedPage from "../pages/get-involved/page";
 import DonatePage from "../pages/donate/page";
 import NewsPage from "../pages/news/page";
 import ContactPage from "../pages/contact/page";
+import GalleryPage from "../pages/gallery/page";
 import PrivacyPage from "../pages/privacy/page";
 import AccessibilityPage from "../pages/accessibility/page";
 
@@ -23,6 +24,7 @@ const routes: RouteObject[] = [
   { path: "/get-involved", element: <InvolvedPage /> },
   { path: "/donate", element: <DonatePage /> },
   { path: "/news", element: <NewsPage /> },
+  { path: "/gallery", element: <GalleryPage /> },
   { path: "/contact", element: <ContactPage /> },
   { path: "/privacy", element: <PrivacyPage /> },
   { path: "/accessibility", element: <AccessibilityPage /> },

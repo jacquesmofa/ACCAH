@@ -1,0 +1,90 @@
+{
+  "albums": [
+    {
+      "slug": "programs",
+      "title": "Programs in action",
+      "title_fr": "Nos programmes en action",
+      "description": "Mentoring, credential recognition, family support and community workshops.",
+      "description_fr": "Mentorat, reconnaissance des titres de compétences, soutien aux familles et ateliers communautaires.",
+      "alt": "Ark of Hope programs",
+      "alt_fr": "Programmes de l’Arche de l’espoir",
+      "photos": [
+        {
+          "src": "https://readdy.ai/api/search-image?query=Cinematic%20photograph%20of%20three%20professional%20women%20of%20African%20descent%20in%20a%20mentoring%20circle%20with%20notebooks%20and%20coffee%20in%20a%20bright%20modern%20room%2C%20warm%20golden%20daylight%2C%20deep%20teal%20accents%2C%20confident%20and%20supportive%20mood%2C%20editorial%20documentary%20style&width=1200&height=900&seq=page-work-women-01&orientation=landscape",
+          "alt": "Three professional women of African descent in a mentoring circle with notebooks and coffee"
+        },
+        {
+          "src": "https://readdy.ai/api/search-image?query=Cinematic%20photograph%20of%20a%20newcomer%20family%20being%20welcomed%20at%20a%20community%20service%20desk%2C%20a%20staff%20member%20handing%20over%20a%20folder%2C%20warm%20afternoon%20light%20through%20tall%20windows%2C%20deep%20teal%20and%20gold%20colour%20grade%2C%20calm%20hopeful%20atmosphere&width=1200&height=900&seq=page-work-newcomer-02&orientation=landscape",
+          "alt": "Newcomer family being welcomed at a community service desk"
+        },
+        {
+          "src": "https://readdy.ai/api/search-image?query=Cinematic%20photograph%20of%20a%20teenage%20student%20and%20an%20adult%20mentor%20working%20through%20homework%20at%20a%20library%20table%2C%20warm%20window%20light%2C%20soft%20deep%20teal%20shadows%2C%20books%20and%20pencils%2C%20quiet%20focused%20atmosphere%2C%20documentary%20style&width=1200&height=900&seq=page-work-youth-03&orientation=landscape",
+          "alt": "Teenage student and an adult mentor working through homework at a library table"
+        },
+        {
+          "src": "https://readdy.ai/api/search-image?query=Cinematic%20photograph%20of%20an%20accessible%20community%20workshop%20with%20a%20ramp%2C%20wide%20doorways%20and%20a%20person%20using%20a%20wheelchair%20joining%20a%20group%20discussion%2C%20warm%20natural%20light%2C%20deep%20teal%20walls%2C%20inclusive%20and%20dignified%20composition&width=1200&height=900&seq=page-work-access-04&orientation=landscape",
+          "alt": "Accessible community workshop with a ramp"
+        },
+        {
+          "src": "https://readdy.ai/api/search-image?query=Cinematic%20photograph%20of%20a%20neighbourhood%20community%20gathering%20in%20a%20courtyard%20with%20shared%20food%20and%20conversation%2C%20warm%20golden%20evening%20light%2C%20deep%20teal%20shadows%2C%20welcoming%20atmosphere%2C%20editorial%20documentary%20style&width=1200&height=900&seq=page-work-wellbeing-05&orientation=landscape",
+          "alt": "Neighbourhood community gathering in a courtyard with shared food and conversation"
+        },
+        {
+          "src": "https://readdy.ai/api/search-image?query=Cinematic%20wide%20photograph%20of%20a%20mother%20and%20daughter%20reading%20together%20beside%20a%20tall%20window%20at%20golden%20hour%2C%20warm%20honey%20light%2C%20deep%20teal%20shadowed%20interior%2C%20calm%20intimate%20mood%2C%20editorial%20documentary%20photography&width=2000&height=1125&seq=page-work-hero-01&orientation=landscape",
+          "alt": "Mother and daughter reading together beside a tall window at golden hour"
+        },
+        {
+          "src": "https://readdy.ai/api/search-image?query=Cinematic%20wide%20photograph%20of%20a%20confident%20internationally%20trained%20African%20woman%20professional%20holding%20a%20diploma%20folder%20in%20a%20modern%20office%20at%20dusk%2C%20warm%20amber%20desk%20lamp%20glow%2C%20deep%20teal%20shadows%20filling%20the%20left%20half%2C%20quiet%20dignified%20mood%2C%20editorial%20style&width=2000&height=1125&seq=page-ark-hero-01&orientation=landscape",
+          "alt": "Confident internationally trained African woman professional holding a diploma folder in a modern office at dusk"
+        },
+        {
+          "src": "https://readdy.ai/api/search-image?query=Cinematic%20photograph%20of%20an%20African%20woman%20professional%20reviewing%20credential%20documents%20and%20a%20laptop%20at%20a%20warm%20lit%20desk%20in%20the%20evening%2C%20teal%20wall%20behind%2C%20gold%20lamp%2C%20determined%20quiet%20expression%2C%20editorial%20documentary%20style&width=1200&height=900&seq=page-ark-challenge-02&orientation=landscape",
+          "alt": "African woman professional reviewing credential documents and a laptop at a warm lit desk"
+        },
+        {
+          "src": "https://readdy.ai/api/search-image?query=Cinematic%20photograph%20of%20a%20bilingual%20advisory%20circle%20of%20African%20and%20Canadian%20women%20around%20a%20wooden%20table%20reviewing%20printed%20documents%2C%20warm%20golden%20window%20light%2C%20deep%20teal%20shadows%2C%20attentive%20listening%2C%20editorial%20documentary%20photography&width=1200&height=900&seq=page-ark-circle-02&orientation=landscape",
+          "alt": "Bilingual advisory circle of African and Canadian women around a wooden table reviewing printed documents"
+        },
+        {
+          "src": "https://readdy.ai/api/search-image?query=Cinematic%20wide%20photograph%20of%20a%20community%20co-design%20workshop%20with%20diverse%20participants%20placing%20paper%20notes%20on%20a%20wall%2C%20warm%20golden%20side%20light%2C%20deep%20teal%20shadows%2C%20hands%20and%20notes%20in%20focus%2C%20editorial%20documentary%20style&width=2000&height=1125&seq=page-impact-hero-01&orientation=landscape",
+          "alt": "Community co-design workshop with diverse participants placing paper notes on a wall"
+        },
+        {
+          "src": "https://readdy.ai/api/search-image?query=Cinematic%20wide%20photograph%20of%20a%20cross-sector%20working%20session%20with%20diverse%20professionals%20around%20a%20long%20table%20covered%20in%20documents%20and%20coffee%20cups%2C%20warm%20golden%20light%20through%20large%20windows%2C%20deep%20teal%20shadows%2C%20collaborative%20focused%20atmosphere%2C%20editorial%20style&width=2000&height=1125&seq=page-partners-hero-01&orientation=landscape",
+          "alt": "Cross-sector working session with diverse professionals around a long table covered in documents and coffee cups"
+        }
+      ]
+    },
+    {
+      "slug": "community",
+      "title": "Community life",
+      "title_fr": "Vie communautaire",
+      "description": "Gatherings, conversations and the people who make the Ark a safe harbour.",
+      "description_fr": "Rencontres, conversations et les personnes qui font de l’Arche un port sûr.",
+      "alt": "Ark of Hope community",
+      "alt_fr": "Communauté de l’Arche de l’espoir",
+      "photos": [
+        {
+          "src": "https://readdy.ai/api/search-image?query=Cinematic%20photograph%20of%20women%20of%20different%20ages%20and%20backgrounds%20seated%20around%20a%20wooden%20table%20in%20a%20bright%20sunlit%20community%20hall%2C%20notebooks%20and%20tea%20cups%2C%20warm%20golden%20window%20light%2C%20deep%20teal%20walls%2C%20dignified%20editorial%20documentary%20style%2C%20calm%20and%20welcoming%20atmosphere&width=1200&height=900&seq=home-about-02&orientation=landscape",
+          "alt": "Women of different ages and backgrounds seated around a wooden table in a bright sunlit community"
+        },
+        {
+          "src": "https://readdy.ai/api/search-image?query=Cinematic%20wide%20photograph%20of%20a%20diverse%20group%20of%20African%20and%20Canadian%20community%20members%20gathered%20in%20a%20sunlit%20hall%20listening%20to%20a%20speaker%2C%20warm%20golden%20window%20light%2C%20deep%20teal%20shadows%20in%20the%20left%20third%2C%20editorial%20documentary%20style%2C%20calm%20and%20dignified%20atmosphere&width=2000&height=1125&seq=page-about-hero-01&orientation=landscape",
+          "alt": "Diverse group of African and Canadian community members gathered in a sunlit hall listening"
+        },
+        {
+          "src": "https://readdy.ai/api/search-image?query=Candid%20cinematic%20photograph%20of%20two%20women%20of%20African%20descent%20in%20conversation%20at%20a%20community%20table%20with%20notebooks%20and%20tea%2C%20warm%20side%20light%2C%20deep%20teal%20wall%20behind%2C%20soft%20focus%20background%2C%20human%20and%20approachable%20documentary%20style&width=1200&height=900&seq=page-about-portrait-02&orientation=landscape",
+          "alt": "Two women of African descent in conversation at a community table with notebooks and tea"
+        },
+        {
+          "src": "https://readdy.ai/api/search-image?query=Cinematic%20wide%20photograph%20of%20volunteers%20setting%20up%20chairs%20and%20tables%20in%20a%20glowing%20community%20hall%20before%20an%20evening%20gathering%2C%20warm%20golden%20lamp%20light%2C%20deep%20teal%20shadows%2C%20welcoming%20atmosphere%2C%20editorial%20documentary%20style&width=2000&height=1125&seq=page-involved-hero-01&orientation=landscape",
+          "alt": "Volunteers setting up chairs and tables in a glowing community hall before an evening gathering"
+        },
+        {
+          "src": "https://readdy.ai/api/search-image?query=Cinematic%20wide%20photograph%20of%20hands%20arranging%20printed%20bilingual%20resources%20and%20booklets%20on%20a%20wooden%20community%20table%2C%20warm%20golden%20afternoon%20light%2C%20deep%20teal%20shadows%2C%20editorial%20still%20life%20with%20human%20presence&width=2000&height=1125&seq=page-news-hero-01&orientation=landscape",
+          "alt": "Hands arranging printed bilingual resources and booklets on a wooden community table"
+        }
+      ]
+    }
+  ]
+}

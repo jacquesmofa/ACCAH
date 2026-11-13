@@ -234,6 +234,13 @@ const pages: Record<string, string> = {
   'dn.form.p': 'Indiquez-nous comment vous souhaitez contribuer et notre équipe communiquera avec vous directement.',
 
   /* ---------------- NOUVELLES ---------------- */
+  'seo.gallery': 'Galerie',
+  'meta.gallery': 'Images de nos programmes et de la vie communautaire.',
+  'gl.stamp': 'Galerie',
+  'gl.h1': 'Notre communauté en images',
+  'gl.sub': 'Des moments de nos programmes et de nos rencontres. Touchez une image pour l’agrandir.',
+  'gl.alt': 'Membres de la communauté réunis autour d’une table',
+  'gl.note': 'Certaines images sont des illustrations en attendant nos propres photos.',
   'nw.stamp': 'Nouvelles et ressources',
   'nw.h1': 'Nouvelles et ressources',
   'nw.sub': 'Cette section présentera les nouvelles de l’organisme, les occasions communautaires, les ressources d’apprentissage, les résultats de projets, les publications bilingues, les annonces de partenaires et les récits de changement.',

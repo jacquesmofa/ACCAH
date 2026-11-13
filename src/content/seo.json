@@ -73,6 +73,13 @@
       "imageAlt": "News and Resources: Updates and Learning | Ark of Hope"
     },
     {
+      "path": "/gallery",
+      "title": "Gallery: Our Community in Pictures | Ark of Hope",
+      "description": "Pictures from our programs and community life: mentoring, credential recognition, family support and gatherings across our bilingual community.",
+      "image": "https://accah.org/social/home.jpg",
+      "imageAlt": "African and Canadian Community Ark of Hope"
+    },
+    {
       "path": "/contact",
       "title": "Contact Us and Frequently Asked Questions | Ark of Hope",
       "description": "Contact our team, route your inquiry to the right person and read answers to the questions we are asked most often. We reply in English or French.",

@@ -17,6 +17,7 @@ export type PageKey =
   | 'involved'
   | 'donate'
   | 'news'
+  | 'gallery'
   | 'contact'
   | 'privacy'
   | 'access'
@@ -48,6 +49,7 @@ export const ROUTE_PATHS: Record<PageKey, string> = {
   involved: '/get-involved',
   donate: '/donate',
   news: '/news',
+  gallery: '/gallery',
   contact: '/contact',
   privacy: '/privacy',
   access: '/accessibility',
@@ -64,6 +66,7 @@ export const NAV_ITEMS: { path: string; labelKey: string }[] = [
   { path: '/partners', labelKey: 'nav.partners' },
   { path: '/get-involved', labelKey: 'nav.involved' },
   { path: '/news', labelKey: 'nav.news' },
+  { path: '/gallery', labelKey: 'nav.gallery' },
   { path: '/contact', labelKey: 'nav.contact' },
   { path: '/donate', labelKey: 'nav.donate' },
 ];
@@ -80,6 +83,7 @@ const OG = {
   involved: card('involved'),
   donate: card('donate'),
   news: card('news'),
+  gallery: card('home'),
   contact: card('contact'),
   privacy: card('privacy'),
   access: card('access'),
@@ -149,6 +153,11 @@ export const PAGE_META: Record<Lang, Record<PageKey, PageMeta>> = {
       'Organizational updates, community opportunities, learning resources and bilingual publications from African and Canadian Community Ark of Hope.',
       OG.news,
     ),
+    gallery: entry(
+      'Gallery: Our Community in Pictures | Ark of Hope',
+      'Pictures from our programs and community life: mentoring, credential recognition, family support and gatherings across our bilingual community.',
+      OG.gallery,
+    ),
     contact: entry(
       'Contact Us and Frequently Asked Questions | Ark of Hope',
       'Contact our team, route your inquiry to the right person and read answers to the questions we are asked most often. We reply in English or French.',
@@ -217,6 +226,11 @@ export const PAGE_META: Record<Lang, Record<PageKey, PageMeta>> = {
       'Nouvelles de l’organisme, occasions communautaires, ressources d’apprentissage et publications bilingues de l’Arche de l’espoir.',
       OG.news,
     ),
+    gallery: entry(
+      'Galerie : notre communauté en images | Arche de l’espoir',
+      'Images de nos programmes et de la vie communautaire : mentorat, reconnaissance des titres de compétences, soutien aux familles et rencontres.',
+      OG.gallery,
+    ),
     contact: entry(
       'Nous joindre et questions fréquentes | Arche de l’espoir',
       'Communiquez avec notre équipe, dirigez votre demande vers la bonne personne et lisez les réponses aux questions les plus fréquentes, en français ou en anglais.',
@@ -270,6 +284,7 @@ export function buildPageSchema(
     about: 'AboutPage',
     work: 'CollectionPage',
     news: 'CollectionPage',
+    gallery: 'CollectionPage',
     impact: 'WebPage',
     contact: 'ContactPage',
   };

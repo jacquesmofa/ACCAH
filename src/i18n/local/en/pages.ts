@@ -234,6 +234,13 @@ const pages: Record<string, string> = {
   'dn.form.p': 'Let us know how you would like to give, and our team will follow up with you directly.',
 
   /* ---------------- NEWS ---------------- */
+  'seo.gallery': 'Gallery',
+  'meta.gallery': 'Pictures from our programs and community life.',
+  'gl.stamp': 'Gallery',
+  'gl.h1': 'Our community in pictures',
+  'gl.sub': 'Moments from our programs and gatherings. Tap any picture to see it full size.',
+  'gl.alt': 'Community members gathered around a table',
+  'gl.note': 'Some pictures are illustrations until our own photos are added.',
   'nw.stamp': 'News and Resources',
   'nw.h1': 'News and Resources',
   'nw.sub': 'This section will share organizational updates, community opportunities, learning resources, project findings, bilingual publications, partner announcements and stories of change.',
